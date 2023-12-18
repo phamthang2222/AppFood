@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "782373539122",
+    "project_id": "login-5ef98",
+    "storage_bucket": "login-5ef98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782373539122:android:034f1cb2ca8a200e149b2b",
+        "android_client_info": {
+          "package_name": "vn.phamthang.loginandregiswithfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyButfbCFz0X_GwKyjg2XtRnIFy8tKogo7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782373539122:android:e81202ab46ab47c2149b2b",
+        "android_client_info": {
+          "package_name": "vn.phamthang.navigationbar_custom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyButfbCFz0X_GwKyjg2XtRnIFy8tKogo7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782373539122:android:ea6a2155fa31e976149b2b",
+        "android_client_info": {
+          "package_name": "vn.phamthang.testloginwithfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyButfbCFz0X_GwKyjg2XtRnIFy8tKogo7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

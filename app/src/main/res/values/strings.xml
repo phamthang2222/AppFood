@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">NavigationBar_custom</string>
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_fav">Yêu thích</string>
+    <string name="nav_his">Lịch sử</string>
+    <string name="nav_logout">Đăng xuất</string>
+    <string name="nav_acc">Tài Khoản</string>
+    <string name="nav_profile">Thông tin cá nhân</string>
+    <string name="nav_changepass">Change Passwork</string>
+    <string name="bottom_nav_home">Trang chủ</string>
+    <string name="bottom_nav_fav">Yêu thích</string>
+
+
+    <string name="nav_drawer_open">Open navigation drawer</string>
+    <string name="nav_drawer_close">Close navigation drawer</string>
+
+</resources>
