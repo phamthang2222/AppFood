@@ -5,29 +5,34 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import vn.phamthang.navigationbar_custom.Activity.ProfileActivity;
+import vn.phamthang.navigationbar_custom.Adapter.FoodAdapter;
 import vn.phamthang.navigationbar_custom.Fragments.FavoriteFragment;
 import vn.phamthang.navigationbar_custom.Fragments.HomeFragment;
 import vn.phamthang.navigationbar_custom.Fragments.OpenFragment;
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView nameUserNavigation, emailUserNavigation;
     private BottomNavigationView bottomNavigationView;
     private OpenFragment openFragment;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         openFragment.replaceFragment(MainActivity.this, new HomeFragment(),"Fragment_home");
         openFragment.setTitle(MainActivity.this);
         bottomNavigationView.getMenu().findItem(R.id.bottom_nav_home).setChecked(true);
+
     }
 
     private void init(){
@@ -220,4 +227,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        try{
+//            HomeFragment homeFragment = new HomeFragment();
+//
+//            getMenuInflater().inflate(R.menu.menu_main,menu);
+//            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//            searchView = (SearchView) menu.findItem(R.id.menu_sreach).getActionView();
+//            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//            searchView.setMaxWidth(Integer.MAX_VALUE);
+//
+//            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//                @Override
+//                public boolean onQueryTextSubmit(String query) {
+//                    if (homeFragment != null && homeFragment.getmFoodAdapter() != null) {
+//                        homeFragment.getmFoodAdapter().getFilter().filter(query);
+//                    }
+//
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean onQueryTextChange(String newText) {
+//                    if (homeFragment != null && homeFragment.getmFoodAdapter() != null) {
+//                        homeFragment.getmFoodAdapter().getFilter().filter(newText);
+//                    }
+//                    return false;
+//                }
+//            });
+//            return true;
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            Log.e("TAG", "Lỗi khi làm gì đó: ", e);
+//        }
+//
+//        return true;
+//    }
 }

@@ -52,7 +52,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-
         init();
         acctionNavigation();
         fillInformationUserFromFireBase();
@@ -73,8 +72,6 @@ public class ProfileActivity extends AppCompatActivity {
         edtEmail.setInputType(InputType.TYPE_CLASS_TEXT);
         edtName.setInputType(InputType.TYPE_CLASS_TEXT);
         edtPhone.setInputType(InputType.TYPE_CLASS_TEXT);
-
-
     }
     private void onListener() {
         btBack.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void acctionNavigation(){
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            //actionBar.setDisplayHomeAsUpEnabled(true); // Kích hoạt mũi tên quay lại
+            actionBar.setDisplayHomeAsUpEnabled(true); // Kích hoạt mũi tên quay lại
             actionBar.setTitle("Thông tin cá nhân"); // Đặt tiêu đề nếu cần
         }
     }
@@ -222,6 +219,12 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void setTitle(){
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Thông tin cá nhân");
+        }
     }
 
 }

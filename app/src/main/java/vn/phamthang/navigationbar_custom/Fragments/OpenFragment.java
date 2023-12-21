@@ -1,7 +1,6 @@
 package vn.phamthang.navigationbar_custom.Fragments;
 
 import android.content.Context;
-import android.widget.Switch;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +28,7 @@ public class OpenFragment {
     }
     public void replaceFragment(AppCompatActivity activity, Fragment fragment,String tag){
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame,fragment,tag);
+        transaction.replace(R.id.content_main,fragment,tag);
         transaction.commit();
     }
 

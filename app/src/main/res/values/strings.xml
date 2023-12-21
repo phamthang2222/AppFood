@@ -9,6 +9,8 @@
     <string name="nav_changepass">Change Passwork</string>
     <string name="bottom_nav_home">Trang chủ</string>
     <string name="bottom_nav_fav">Yêu thích</string>
+    <string name="menu_cart">Giỏ hàng</string>
+    <string name="menu_sreach">Tìm kiếm</string>
 
 
     <string name="nav_drawer_open">Open navigation drawer</string>

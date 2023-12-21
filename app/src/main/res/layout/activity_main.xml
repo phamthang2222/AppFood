@@ -6,14 +6,13 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".MainActivity">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
@@ -22,33 +21,33 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/white"
+                android:background="@drawable/custom_color_2"
                 app:navigationIcon="?attr/homeAsUpIndicator"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight">
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
-            android:id="@+id/content_frame"
+        <RelativeLayout
+            android:id="@+id/content_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar_layout"
+            android:layout_above="@+id/bottomNavigation"
+            tools:ignore="NotSibling">
+
+        </RelativeLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:background="@drawable/custom_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigation"
-                android:background="@drawable/custom_color"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                app:menu="@menu/menu_bottom_nav"
-                app:itemIconTint="@color/custom_color_bottom_nav"
-                app:itemTextColor="@color/custom_color_bottom_nav"
-                />
-        </RelativeLayout>
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/menu_bottom_nav"
+            app:itemIconTint="@color/custom_color_bottom_nav"
+            app:itemTextColor="@color/custom_color_bottom_nav"/>
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
@@ -56,7 +55,6 @@
         android:layout_height="match_parent"
         app:headerLayout="@layout/layout_nav_header"
         android:layout_gravity="start"
-        app:menu="@menu/menu_nav"
-        />
+        app:menu="@menu/menu_nav"/>
 
   </androidx.drawerlayout.widget.DrawerLayout>
