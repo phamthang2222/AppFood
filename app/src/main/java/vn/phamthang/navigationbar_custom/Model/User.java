@@ -3,6 +3,7 @@ package vn.phamthang.navigationbar_custom.Model;
 import java.io.Serializable;
 
 public class User implements Serializable {
+    private String idUser;
     private String name;
     private String email;
     private String passWord;
@@ -14,12 +15,27 @@ public class User implements Serializable {
         this.passWord = passWord;
         this.phoneNumber = phoneNumber;
     }
+    public User(String idUser, String name, String email, String passWord, String phoneNumber) {
+        this.idUser = idUser;
+        this.name = name;
+        this.email = email;
+        this.passWord = passWord;
+        this.phoneNumber = phoneNumber;
+    }
     public User(String passWord) {
 
         this.passWord = passWord;
 
     }
     public User() {
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getName() {
