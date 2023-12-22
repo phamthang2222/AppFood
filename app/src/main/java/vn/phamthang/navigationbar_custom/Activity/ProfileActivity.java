@@ -1,6 +1,6 @@
 package vn.phamthang.navigationbar_custom.Activity;
 
-import static vn.phamthang.navigationbar_custom.Fragments.ChangePassWord.currentPasswordInFireBase;
+import static vn.phamthang.navigationbar_custom.Fragments.ChangePassWordDialogFragment.currentPasswordInFireBase;
 
 import androidx.annotation.NonNull;
 
@@ -11,16 +11,13 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import vn.phamthang.navigationbar_custom.Fragments.ChangePassWord;
+import vn.phamthang.navigationbar_custom.Dialog.ConfirmDialog;
+import vn.phamthang.navigationbar_custom.Fragments.ChangePassWordDialogFragment;
 import vn.phamthang.navigationbar_custom.MainActivity;
 import vn.phamthang.navigationbar_custom.Model.User;
 import vn.phamthang.navigationbar_custom.R;
@@ -121,7 +119,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Create an instance of the fragment
-                ChangePassWord changePasswordFragment = new ChangePassWord();
+                ChangePassWordDialogFragment changePasswordFragment = new ChangePassWordDialogFragment();
 
                 // Get the FragmentManager
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -154,32 +152,11 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
     }
-
     private void showConfirmationDialog() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
-        builder.setTitle("Xác nhận");
-        builder.setMessage("Bạn chưa cập nhật thông tin!");
-
-        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-
-                finish();
-            }
-        });
-
-        builder.setNegativeButton("Hủy bỏ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Xử lý khi người dùng hủy bỏ
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        ConfirmDialog dialogManager = new ConfirmDialog(getApplicationContext());
+        dialogManager.showConfirmationDialogAtProfileActivity(this);
     }
+
     private void fillInformationUserFromFireBase(){
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();

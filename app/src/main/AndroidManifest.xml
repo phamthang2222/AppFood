@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/food_app_icon"
         android:label="Bán Hàng"
         android:supportsRtl="true"
         android:theme="@style/Theme.NavigationBar_custom"
