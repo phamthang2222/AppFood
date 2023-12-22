@@ -26,6 +26,7 @@ public class RegisActivity extends AppCompatActivity  {
     private EditText edtName, edtEmail, edtPass, edtRepeatPass;
     private Button btRegis, btBack;
     private FirebaseAuth firebaseAuth;
+    private int index_idUser = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class RegisActivity extends AppCompatActivity  {
         btRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String idUser = "IDUSER_" + index_idUser++;
                 String email = edtEmail.getText().toString().trim();
                 String password = edtPass.getText().toString().trim();
                 String name = edtName.getText().toString().trim();
@@ -85,8 +87,8 @@ public class RegisActivity extends AppCompatActivity  {
 
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             // Tạo một đối tượng User với thông tin từ đăng ký
-                            User user = new User(name,email,password,"null");
-
+                            //User user = new User(name,email,password,"null");
+                            User user = new User(idUser,name,email,password,"null");
                             // Lưu thông tin người dùng vào database (ví dụ: Firebase Realtime Database)
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
                             databaseReference.child(firebaseUser.getUid()).setValue(user);

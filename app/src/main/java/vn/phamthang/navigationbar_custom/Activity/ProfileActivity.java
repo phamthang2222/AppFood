@@ -42,9 +42,7 @@ import vn.phamthang.navigationbar_custom.R;
 
 public class ProfileActivity extends AppCompatActivity {
     private Button btBack, btUpdate;
-    private
-
-    CardView btChangePassword;
+    private CardView btChangePassword;
     private EditText edtEmail, edtName, edtPhone;
     private TextView edtPass;
     @Override
