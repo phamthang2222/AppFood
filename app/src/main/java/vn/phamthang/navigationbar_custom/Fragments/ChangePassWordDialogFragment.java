@@ -36,7 +36,6 @@ public class ChangePassWordDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        Log.d("tag","change pass");
         return super.onCreateDialog(savedInstanceState);
     }
 
@@ -130,7 +129,6 @@ public class ChangePassWordDialogFragment extends DialogFragment {
                 if (dataSnapshot.exists()) {
                     // Lấy dữ liệu từ nút con của người dùng hiện tại
                     currentPasswordInFireBase = dataSnapshot.child("passWord").getValue(String.class);
-                    Log.d("mk: ", currentPasswordInFireBase);
                 }
             }
             @Override

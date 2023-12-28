@@ -5,12 +5,22 @@ public class Food {
     private String name;
     private int quantity;
     private double price;
+    private boolean isFav;
 
-    public Food(String imageUrl, String name, int quantity, double price) {
+    public Food(String imageUrl, String name, int quantity, double price,boolean isFav) {
         this.imageUrl = imageUrl;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
+        this.isFav = isFav;
+    }
+
+    public boolean isFav() {
+        return isFav;
+    }
+
+    public void setFav(boolean fav) {
+        isFav = fav;
     }
 
     public Food() {

@@ -206,41 +206,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-//        try{
-            HomeFragment homeFragment = new HomeFragment();
-
-            getMenuInflater().inflate(R.menu.menu_main,menu);
-            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            searchView = (SearchView) menu.findItem(R.id.menu_sreach).getActionView();
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            searchView.setMaxWidth(Integer.MAX_VALUE);
-
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    if (homeFragment != null && homeFragment.getmFoodAdapter() != null) {
-                        homeFragment.getmFoodAdapter().getFilter().filter(query);
-                        Log.d("TAG","null array");
-                    }
-                    return false;
-                }
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    if (homeFragment != null && homeFragment.getmFoodAdapter() != null) {
-                        homeFragment.getmFoodAdapter().getFilter().filter(newText);
-                    }
-                    return false;
-                }
-            });
-            return true;
-
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            Log.e("TAG", "Lỗi khi làm gì đó: ", e);
-//        }
-//        return true;
-    }
 }
