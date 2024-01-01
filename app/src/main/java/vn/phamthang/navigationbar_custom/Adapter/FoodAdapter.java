@@ -1,7 +1,6 @@
 package vn.phamthang.navigationbar_custom.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +51,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             return;
         }else {
             holder.tvName.setText(foods.getName());
-            holder.tvQuantity.setText("Số lượng: "+String.valueOf(foods.getQuantity()));
+            holder.tvStatus.setText(foods.getStatus());
             holder.tvPrice.setText(String.format("%,.2f vnđ",foods.getPrice()));
             Glide.with(mcontext).load(foods.getImageUrl())
                     .into(holder.imageView);
@@ -78,12 +77,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     }
     public class FoodViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView,btFav ;
-        TextView tvName, tvQuantity, tvPrice;
+        TextView tvName, tvStatus, tvPrice;
         CardView cardView;
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvFoodName);
-            tvQuantity = itemView.findViewById(R.id.tvFoodQuantity);
+            tvStatus = itemView.findViewById(R.id.tvFoodStatus);
             tvPrice = itemView.findViewById(R.id.tvFoodPrice);
             imageView = itemView.findViewById(R.id.imgUserImg);
             btFav = itemView.findViewById(R.id.btFav);

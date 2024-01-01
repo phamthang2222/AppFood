@@ -46,13 +46,13 @@
                 android:text="Cà chua" />
 
             <TextView
-                android:id="@+id/tvFoodQuantity"
+                android:id="@+id/tvFoodStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18dp"
                 android:fontFamily="@font/quicksand_medium"
                 android:textColor="@color/black"
-                android:text="Số lượng" />
+                android:text="Còn hàng" />
 
             <TextView
                 android:id="@+id/tvFoodPrice"

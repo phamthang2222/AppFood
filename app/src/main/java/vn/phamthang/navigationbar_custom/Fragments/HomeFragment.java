@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,8 +39,8 @@ import vn.phamthang.navigationbar_custom.R;
 
 
 public class HomeFragment extends Fragment{
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef = database.getReference("ListFood");
     RecyclerView mRecyclerView;
     FoodAdapter mFoodAdapter;
 
@@ -57,6 +58,7 @@ public class HomeFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         mRecyclerView = view.findViewById(R.id.recycleViewListFoods);
         displayFood();
+//        pushDataToFirebase(getFoodList());
         fetchListFoodFromRealtimeDataBase();
         return view;
     }
@@ -77,66 +79,6 @@ public class HomeFragment extends Fragment{
         mFoodAdapter.setMfoodList(foods);
         mFoodAdapter.notifyDataSetChanged();
     }
-//    private List<Food> getFoodList(){
-//        List<Food> list = new ArrayList<>();
-//
-//        list.add(new Food("https://daynauan.info.vn/wp-content/uploads/2019/05/suon-non-kho-nuoc-dua.jpg",
-//                "Sườn xào ",30,265_000));
-//        list.add(new Food("https://cdn-i.vtcnews.vn/resize/th/upload/2023/09/18/27706f19b4ba94f6f2a9a9a18dc02033-23522159.jpg",
-//                "Thịt gà",50,210_000));
-//        list.add(new Food("https://daotaobeptruong.vn/wp-content/uploads/2019/10/chuoi-boc-nep-mon-an-vat-ban-online.jpg",
-//                "Xôi",4,50_000));
-//        list.add(new Food("https://saodieu.vn/media/Bai%20Viet%20-%20T62016/Saodieu%20-%2010%20mon%20an%203.jpg",
-//                "Nem rán",10,110_000));
-//        list.add(new Food("https://i2.ex-cdn.com/nongnghiepso.nongnghiep.vn/files/guest/21/2021/12/30/21--zdhcosz-104331.jpg",
-//                "Thịt gà đen",1,330_000));
-//        list.add(new Food("https://i-giadinh.vnecdn.net/2021/10/11/Longnonxaoduachuaancungcom-163-2034-2534-1633939319.jpg",
-//                "Lòng xào dưa",5,70_000));
-//        return  list;
-//    }
-//    private void pushDataToFirebase(List<Food> foodList) {
-//        DatabaseReference listFoodRef = myRef.child("ListFood");
-//        // Đặt giá trị cho child "ListFood" bằng danh sách foodList
-//        listFoodRef.setValue(foodList)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        // Nếu lưu dữ liệu thành công
-//                    }
-//                } )
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//
-//                    }
-//                });
-//    }
-//    private List<Food> fetchListFoodFromRealtimeDataBase(){
-//        final List<Food> list = new ArrayList<>();
-//        DatabaseReference listFoodRef = myRef.child("ListFood");
-//        listFoodRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                list.clear();
-//                // Lặp qua từng phần tử trong dataSnapshot
-//                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-//                    // Chuyển đổi dataSnapshot thành đối tượng Food
-//                    Food food = postSnapshot.getValue(Food.class);
-//                    if (food != null) {
-//                        // Thêm food vào danh sách
-//                        list.add(food);
-//                    }
-//                }
-//                updateAdapterWithData(list);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//        return list;
-//    }
     private List<Food> fetchListFoodFromRealtimeDataBase(){
         List<Food> list = new ArrayList<>();
         FetchListFoodFromFireBase fetchListFoodFromFireBase = new FetchListFoodFromFireBase();
@@ -148,18 +90,49 @@ public class HomeFragment extends Fragment{
             }
             @Override
             public void onError(String errorMessage) {
-
+                Log.d("TAG","Lỗi lấy data");
             }
         });
         return list;
     }
+//    private List<Food> getFoodList(){
+//        List<Food> list = new ArrayList<>();
+//        ArrayList<String> Listimages = new ArrayList<>();
+//        Listimages.add("https://static-images.vnncdn.net/files/publish/2023/9/9/cha-com-1-339.jpg");
+//        Listimages.add("https://songkhoe.medplus.vn/wp-content/uploads/2020/03/C%C3%A1ch-l%C3%A0m-ch%E1%BA%A3-c%E1%BB%91m.png");
+//        Listimages.add("https://dacsanngon3mien.net/wp-content/uploads/2022/12/cha-com-lam-mon-gi-ngon-12.jpg");
+//        list.add(new Food("https://cdn.tgdd.vn/2021/04/CookRecipe/Avatar/cha-com-chay-thumbnail-2.jpg","Chả cốm","Còn hàng",
+//                "chả cốm hà nội ngon ơi là ngon mọi người ghé mua",22000,Listimages,false));
+//        return  list;
+//    }
+//    private void pushDataToFirebase(List<Food> foodList) {
+//        DatabaseReference listFoodRef = myRef.child("ListFood");
+//        // Đặt giá trị cho child "ListFood" bằng danh sách foodList
+//        listFoodRef.setValue(foodList)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        Toast.makeText(getContext(), "thành công", Toast.LENGTH_SHORT).show();
+//                    }
+//                } )
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//
+//                    }
+//                });
+//    }
     private void onClickGoToFoodDetail(Food food){
         Intent intent = new Intent(getContext(), DetailFoodActivity.class);
+        intent.putExtra("FoodUrlImg",food.getImageUrl());
         intent.putExtra("FoodName",food.getName());
-        intent.putExtra("FoodQuantity",food.getQuantity());
+        intent.putExtra("FoodStatus",food.getStatus());
         intent.putExtra("FoodPrice",food.getPrice());
+        intent.putExtra("FoodDes",food.getDescription());
+        intent.putExtra("FoodImgDetail",food.getListImgDetail());
+        intent.putStringArrayListExtra("FoodListDetailImg", food.getListImgDetail());
+
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getContext().startActivity(intent);
     }
-
 }
