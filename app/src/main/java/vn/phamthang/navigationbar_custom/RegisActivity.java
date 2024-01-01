@@ -49,7 +49,8 @@ public class RegisActivity extends AppCompatActivity  {
         btRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String idUser = "IDUSER_" + index_idUser++;
+                String idUser = "IDUSER_" +index_idUser;
+                index_idUser++;
                 String email = edtEmail.getText().toString().trim();
                 String password = edtPass.getText().toString().trim();
                 String name = edtName.getText().toString().trim();

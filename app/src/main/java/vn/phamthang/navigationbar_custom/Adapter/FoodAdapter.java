@@ -4,35 +4,28 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
+
+import vn.phamthang.navigationbar_custom.Interface.iClickItemFood;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import vn.phamthang.navigationbar_custom.Model.Food;
 import vn.phamthang.navigationbar_custom.R;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> implements Filterable {
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder>  {
 
-    Context mcontext;
-    List<Food> mfoodList;
-    List<Food> mfoodListOld;
-    @NonNull
-    @Override
-    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_layout,parent,false);
-        return  new FoodViewHolder(view);
-    }
-
+    private Context mcontext;
+    private List<Food> mfoodList;
+    private iClickItemFood iClickItemFood;
     public List<Food> getMfoodList() {
         return mfoodList;
     }
@@ -40,12 +33,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public void setMfoodList(List<Food> mfoodList) {
         this.mfoodList = mfoodList;
     }
-
-    public FoodAdapter(Context mcontext, List<Food> mfoodList) {
+    public FoodAdapter(Context mcontext, List<Food> mfoodList, iClickItemFood iClickItemFood) {
         this.mcontext = mcontext;
         this.mfoodList = mfoodList;
+        this.iClickItemFood = iClickItemFood;
     }
-
+    @NonNull
+    @Override
+    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_layout,parent,false);
+        return  new FoodViewHolder(view);
+    }
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         Food foods = mfoodList.get(position);
@@ -53,14 +51,23 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             return;
         }else {
             holder.tvName.setText(foods.getName());
-            holder.tvQuantity.setText("Số lượng: "+String.valueOf(foods.getQuantity()));
-            holder.tvPrice.setText(String.format("%.2f vnđ",foods.getPrice()));
+            holder.tvStatus.setText(foods.getStatus());
+            holder.tvPrice.setText(String.format("%,.2f vnđ",foods.getPrice()));
             Glide.with(mcontext).load(foods.getImageUrl())
                     .into(holder.imageView);
-
+            if(foods.isFav() == true ){
+                holder.btFav.setBackgroundResource(R.drawable.ic_favourite_pink);
+            }else {
+                holder.btFav.setBackgroundResource(R.drawable.ic_favourite_black);
+            }
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    iClickItemFood.onClickItemFood(foods);
+                }
+            });
         }
     }
-
     @Override
     public int getItemCount() {
         if(mfoodList != null){
@@ -68,48 +75,20 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         }
         return 0;
     }
-
     public class FoodViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView tvName, tvQuantity, tvPrice;
-
+        ImageView imageView,btFav ;
+        TextView tvName, tvStatus, tvPrice;
+        CardView cardView;
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvFoodName);
-            tvQuantity = itemView.findViewById(R.id.tvFoodQuantity);
+            tvStatus = itemView.findViewById(R.id.tvFoodStatus);
             tvPrice = itemView.findViewById(R.id.tvFoodPrice);
             imageView = itemView.findViewById(R.id.imgUserImg);
+            btFav = itemView.findViewById(R.id.btFav);
+            cardView =itemView.findViewById(R.id.cardViewFoodLayout);
         }
-    }
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                String strSearch = constraint.toString();
-                if(strSearch.isEmpty()){
-                    mfoodList= mfoodListOld;
-                }else {
-                    List<Food> listFillter = new ArrayList<>();
-                    for(Food values: listFillter){
-                        if(values.getName().toLowerCase().contains(strSearch.toLowerCase())){ // tên food có chưa kí tự của tên tìm kiềm
-                            // thì add vào listFillter
-                            listFillter.add(values);
-                        }
-                    }
-                    mfoodList = listFillter;
-                }
 
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = mfoodList;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mfoodList = (List<Food>) results.values;
-                notifyDataSetChanged();
-            }
-        };
     }
+
 }

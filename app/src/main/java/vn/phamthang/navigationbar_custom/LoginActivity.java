@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void initAccout(){
         String email = "t1@gmail.com";
-        String pass = "qwertyui";
+        String pass = "123456";
         edtEmail.setText(email);
         edtPass.setText(pass);
 

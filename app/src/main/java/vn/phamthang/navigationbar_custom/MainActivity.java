@@ -14,12 +14,10 @@ import androidx.fragment.app.FragmentManager;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -33,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import vn.phamthang.navigationbar_custom.Activity.ProfileActivity;
 import vn.phamthang.navigationbar_custom.Adapter.FoodAdapter;
+import vn.phamthang.navigationbar_custom.Dialog.ConfirmDialog;
 import vn.phamthang.navigationbar_custom.Fragments.FavoriteFragment;
 import vn.phamthang.navigationbar_custom.Fragments.HomeFragment;
 import vn.phamthang.navigationbar_custom.Fragments.OpenFragment;
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //navigation bottom
         acctionBottomNavigation();
         //
-
         openFragment = new OpenFragment();
         openFragment.replaceFragment(MainActivity.this, new HomeFragment(),"Fragment_home");
         openFragment.setTitle(MainActivity.this);
@@ -151,27 +149,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         finish(); // Đóng màn hình hiện tại để ngăn chặn việc quay lại
     }
     private void showConfirmationDialog() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Xác nhận");
-        builder.setMessage("Bạn muốn thoát ứng dụng?");
-
-        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-
-        builder.setNegativeButton("Hủy bỏ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Xử lý khi người dùng hủy bỏ
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        ConfirmDialog dialogManager = new ConfirmDialog(MainActivity.this);
+        dialogManager.showConfirmationDialog(this);
     }
 
     private void acctionBottomNavigation(){
@@ -227,43 +206,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        try{
-//            HomeFragment homeFragment = new HomeFragment();
-//
-//            getMenuInflater().inflate(R.menu.menu_main,menu);
-//            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//            searchView = (SearchView) menu.findItem(R.id.menu_sreach).getActionView();
-//            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//            searchView.setMaxWidth(Integer.MAX_VALUE);
-//
-//            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//                @Override
-//                public boolean onQueryTextSubmit(String query) {
-//                    if (homeFragment != null && homeFragment.getmFoodAdapter() != null) {
-//                        homeFragment.getmFoodAdapter().getFilter().filter(query);
-//                    }
-//
-//                    return false;
-//                }
-//
-//                @Override
-//                public boolean onQueryTextChange(String newText) {
-//                    if (homeFragment != null && homeFragment.getmFoodAdapter() != null) {
-//                        homeFragment.getmFoodAdapter().getFilter().filter(newText);
-//                    }
-//                    return false;
-//                }
-//            });
-//            return true;
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            Log.e("TAG", "Lỗi khi làm gì đó: ", e);
-//        }
-//
-//        return true;
-//    }
 }
