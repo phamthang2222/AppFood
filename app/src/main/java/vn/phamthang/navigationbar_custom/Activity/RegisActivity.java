@@ -1,4 +1,4 @@
-package vn.phamthang.navigationbar_custom;
+package vn.phamthang.navigationbar_custom.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import vn.phamthang.navigationbar_custom.Model.User;
+import vn.phamthang.navigationbar_custom.R;
 
 public class RegisActivity extends AppCompatActivity  {
     private EditText edtName, edtEmail, edtPass, edtRepeatPass;
@@ -87,10 +87,8 @@ public class RegisActivity extends AppCompatActivity  {
                         if(task.isSuccessful()){
 
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                            // Tạo một đối tượng User với thông tin từ đăng ký
-                            //User user = new User(name,email,password,"null");
-                            User user = new User(idUser,name,email,password,"null");
-                            // Lưu thông tin người dùng vào database (ví dụ: Firebase Realtime Database)
+                            User user = new User(firebaseUser.getUid(),name,email,password,"null");
+                            // Lưu thông tin người dùng vào database
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
                             databaseReference.child(firebaseUser.getUid()).setValue(user);
 

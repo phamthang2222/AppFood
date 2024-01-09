@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import androidx.appcompat.app.AlertDialog;
 
 import vn.phamthang.navigationbar_custom.Activity.ProfileActivity;
-import vn.phamthang.navigationbar_custom.MainActivity;
+import vn.phamthang.navigationbar_custom.Activity.MainActivity;
 
 public class ConfirmDialog {
     private Context context;

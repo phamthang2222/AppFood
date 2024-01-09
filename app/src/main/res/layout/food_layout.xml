@@ -43,7 +43,13 @@
                 android:fontFamily="@font/quicksand_medium"
                 android:textStyle="bold"
                 android:textColor="#FF9800"
-                android:text="Cà chua" />
+                android:text="Cà chua"
+
+                android:shadowColor="#000000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                />
 
             <TextView
                 android:id="@+id/tvFoodStatus"
@@ -52,7 +58,13 @@
                 android:textSize="18dp"
                 android:fontFamily="@font/quicksand_medium"
                 android:textColor="@color/black"
-                android:text="Còn hàng" />
+                android:text="Còn hàng"
+
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="0"
+                />
 
             <TextView
                 android:id="@+id/tvFoodPrice"
@@ -61,18 +73,32 @@
                 android:textSize="18dp"
                 android:fontFamily="@font/quicksand_medium"
                 android:textColor="#FD1908"
-                android:text="12.000" />
+                android:text="12.000"
+
+                android:shadowColor="#090909"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                />
         </LinearLayout>
 
         </LinearLayout>
     <ImageView
-        android:id="@+id/btFav"
+        android:id="@+id/imgHot"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/ic_favourite_black"
         android:layout_marginRight="12dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="top|end"
+        />
+    <ImageView
+        android:id="@+id/imgFav"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="top|end"
+
         />
 
 </androidx.cardview.widget.CardView>

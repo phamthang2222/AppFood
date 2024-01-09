@@ -2,7 +2,8 @@ package vn.phamthang.navigationbar_custom.Model;
 
 import java.util.ArrayList;
 
-public class Food {
+public class FavFood {
+    private String idUser;
     private String imageUrl;
     private String name;
     private String status;
@@ -12,7 +13,8 @@ public class Food {
     private boolean isFav;
     private boolean isSale;
 
-    public Food(String imageUrl, String name, String status, String description, double price, ArrayList<String> listImgDetail, boolean isFav, boolean isSale) {
+    public FavFood(String idUser, String imageUrl, String name, String status, String description, double price, ArrayList<String> listImgDetail, boolean isFav, boolean isSale) {
+        this.idUser = idUser;
         this.imageUrl = imageUrl;
         this.name = name;
         this.status = status;
@@ -22,7 +24,15 @@ public class Food {
         this.isFav = isFav;
         this.isSale = isSale;
     }
-    public Food() {
+    public FavFood() {
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public boolean isFav() {
@@ -91,7 +101,14 @@ public class Food {
 
     @Override
     public String toString() {
-        return "Food{" +
+        return "FavFood{" +
+                "idUser='" + idUser + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", listImgDetail=" + listImgDetail +
                 ", isFav=" + isFav +
                 ", isSale=" + isSale +
                 '}';

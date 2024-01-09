@@ -1,17 +1,15 @@
-package vn.phamthang.navigationbar_custom;
+package vn.phamthang.navigationbar_custom.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import vn.phamthang.navigationbar_custom.Model.User;
+import vn.phamthang.navigationbar_custom.R;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -4,14 +4,12 @@ import static vn.phamthang.navigationbar_custom.Fragments.ChangePassWordDialogFr
 
 import androidx.annotation.NonNull;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MenuItem;
@@ -34,7 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import vn.phamthang.navigationbar_custom.Dialog.ConfirmDialog;
 import vn.phamthang.navigationbar_custom.Fragments.ChangePassWordDialogFragment;
-import vn.phamthang.navigationbar_custom.MainActivity;
 import vn.phamthang.navigationbar_custom.Model.User;
 import vn.phamthang.navigationbar_custom.R;
 

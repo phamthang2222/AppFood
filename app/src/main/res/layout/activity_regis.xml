@@ -7,7 +7,7 @@
     android:background="@drawable/bg2"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".RegisActivity">
+    tools:context=".Activity.RegisActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

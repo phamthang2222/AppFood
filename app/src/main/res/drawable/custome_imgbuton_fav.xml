@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Trạng thái khi nút được nhấn -->
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#FF0101" /> <!-- Màu khi nhấn -->
+            <corners android:radius="100dp" /> <!-- Độ bo góc -->
+        </shape>
+    </item>
+    <!-- Trạng thái mặc định của nút -->
+    <item>
+        <shape>
+            <solid android:color="#FF6F00"/>
+            <corners android:radius="100dp"/>
+            />
+        </shape>
+    </item>
+</selector>

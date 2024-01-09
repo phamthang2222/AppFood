@@ -1,6 +1,9 @@
 package vn.phamthang.navigationbar_custom.Adapter;
 
+import static com.google.firebase.database.DatabaseKt.getSnapshots;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -22,13 +27,11 @@ import vn.phamthang.navigationbar_custom.Model.Food;
 import vn.phamthang.navigationbar_custom.R;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder>  {
-
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef = database.getReference("ListFood");
     private Context mcontext;
     private List<Food> mfoodList;
     private iClickItemFood iClickItemFood;
-    public List<Food> getMfoodList() {
-        return mfoodList;
-    }
 
     public void setMfoodList(List<Food> mfoodList) {
         this.mfoodList = mfoodList;
@@ -55,11 +58,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             holder.tvPrice.setText(String.format("%,.2f vnđ",foods.getPrice()));
             Glide.with(mcontext).load(foods.getImageUrl())
                     .into(holder.imageView);
-            if(foods.isFav() == true ){
-                holder.btFav.setBackgroundResource(R.drawable.ic_favourite_pink);
-            }else {
-                holder.btFav.setBackgroundResource(R.drawable.ic_favourite_black);
+            if(foods.isSale() == true ){
+                holder.imgHot.setBackgroundResource(R.drawable.ic_hot);
             }
+
+
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -76,7 +79,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         return 0;
     }
     public class FoodViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView,btFav ;
+        ImageView imageView,imgHot,imgFav;
         TextView tvName, tvStatus, tvPrice;
         CardView cardView;
         public FoodViewHolder(@NonNull View itemView) {
@@ -85,10 +88,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             tvStatus = itemView.findViewById(R.id.tvFoodStatus);
             tvPrice = itemView.findViewById(R.id.tvFoodPrice);
             imageView = itemView.findViewById(R.id.imgUserImg);
-            btFav = itemView.findViewById(R.id.btFav);
+            imgHot = itemView.findViewById(R.id.imgHot);
+            imgFav = itemView.findViewById(R.id.imgFav);
             cardView =itemView.findViewById(R.id.cardViewFoodLayout);
         }
-
     }
-
 }

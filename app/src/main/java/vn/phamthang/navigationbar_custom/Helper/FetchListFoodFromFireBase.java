@@ -38,7 +38,6 @@ public class FetchListFoodFromFireBase {
                     listener.onDataFetched(list);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 if (listener != null) {

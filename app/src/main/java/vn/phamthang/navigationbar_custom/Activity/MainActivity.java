@@ -1,9 +1,7 @@
-package vn.phamthang.navigationbar_custom;
+package vn.phamthang.navigationbar_custom.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -12,30 +10,22 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import vn.phamthang.navigationbar_custom.Activity.ProfileActivity;
-import vn.phamthang.navigationbar_custom.Adapter.FoodAdapter;
 import vn.phamthang.navigationbar_custom.Dialog.ConfirmDialog;
-import vn.phamthang.navigationbar_custom.Fragments.FavoriteFragment;
 import vn.phamthang.navigationbar_custom.Fragments.HomeFragment;
 import vn.phamthang.navigationbar_custom.Fragments.OpenFragment;
 import vn.phamthang.navigationbar_custom.Model.User;
+import vn.phamthang.navigationbar_custom.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawerLayout;
@@ -94,11 +84,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setInformationNavigation(){
-        // Nhận dữ liệu từ Intent
+
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("user")) {
             User user = (User) intent.getSerializableExtra("user");
-            // Hiển thị thông tin trên các TextView
+
             nameUserNavigation.setText(user.getName());
             emailUserNavigation.setText(user.getEmail());
         }
@@ -123,9 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else if (id == R.id.nav_logout) {
             logout();
         }
-
         openFragment.setTitle(MainActivity.this);
-
         // khi chọn 1 mục sẽ đóng drawer
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -144,9 +132,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void logout() {
         FirebaseAuth.getInstance().signOut();
         Toast.makeText(MainActivity.this, "Đăng xuất thành công!", Toast.LENGTH_SHORT).show();
-        // Chuyển đến màn hình đăng nhập hoặc màn hình chào mừng tùy thuộc vào thiết kế của ứng dụng
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        finish(); // Đóng màn hình hiện tại để ngăn chặn việc quay lại
+        finish();
     }
     private void showConfirmationDialog() {
         ConfirmDialog dialogManager = new ConfirmDialog(MainActivity.this);
@@ -178,32 +165,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setCheckedItem(itemId);
         onNavigationItemSelected(navigationView.getMenu().findItem(itemId));
     }
-    public void pauseFrag(){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        // Tạm ngừng fragment1
-        Fragment fragment1 = fragmentManager.findFragmentByTag("Fragment_home");
-        if (fragment1 != null) {
-            fragmentManager.beginTransaction().detach(fragment1).commit();
-        }
-        // Tạm ngừng fragment2
-        Fragment fragment2 = fragmentManager.findFragmentByTag("Fragment_fav");
-        if (fragment2 != null) {
-            fragmentManager.beginTransaction().detach(fragment2).commit();
-        }
-    }
-    public void attachFragment(){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        Fragment fragment1 = fragmentManager.findFragmentByTag("Fragment_home");
-        Fragment fragment2 = fragmentManager.findFragmentByTag("Fragment_fav");
-        if (fragment1 != null) {
-            fragmentManager.beginTransaction().attach(fragment1).commit();
-        }
-
-        // Kích hoạt lại fragment2
-        if (fragment2 != null) {
-            fragmentManager.beginTransaction().attach(fragment2).commit();
-        }
-    }
-
 }
